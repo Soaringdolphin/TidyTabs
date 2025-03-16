@@ -49,3 +49,7 @@ yarn-error.*
 
 # EAS
 .eas/
+
+# Firebase config
+google-services.json
+android/app/google-services.json

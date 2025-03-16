@@ -8,7 +8,7 @@
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#E0FFFF"
     },
@@ -30,7 +30,8 @@
       },
       "package": "io.github.Soaringdolphin.tidytabs",
       "versionCode": 1,
-      "permissions": ["INTERNET"]
+      "permissions": ["INTERNET"],
+      "googleServicesFile": "./android/app/google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
