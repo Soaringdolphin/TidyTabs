@@ -33,14 +33,13 @@ DerivedData
 project.xcworkspace
 
 # Android/IntelliJ
-/android
 .idea
 .gradle
 local.properties
 *.iml
 
-# Keep google-services.json in android/app
-/google-services.json
+# Make sure google-services.json is included
+!/google-services.json
 
 # node.js
 node_modules/

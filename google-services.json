@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "226369107423",
+    "project_id": "tidytabs-5ecb9",
+    "storage_bucket": "tidytabs-5ecb9.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:226369107423:android:c1c8fcb1368a9d7aba406a",
+        "android_client_info": {
+          "package_name": "io.github.Soaringdolphin.tidytabs"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDb96-tfAq124yvWErY364jPLcDRBf1x2Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
