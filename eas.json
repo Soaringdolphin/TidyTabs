@@ -8,20 +8,32 @@
       "developmentClient": true,
       "distribution": "internal",
       "android": {
-        "gradleCommand": ":app:assembleDebug"
-      }
+        "gradleCommand": ":app:assembleDebug",
+        "credentialsSource": "remote"
+      },
+      "prebuildCommand": "npx expo prebuild --no-install"
     },
     "preview": {
       "distribution": "internal",
       "android": {
-        "buildType": "apk"
-      }
+        "buildType": "apk",
+        "credentialsSource": "remote"
+      },
+      "env": {
+        "GOOGLE_SERVICES_FILE": "./google-services.json"
+      },
+      "prebuildCommand": "npx expo prebuild --no-install"
     },
     "production": {
       "autoIncrement": true,
       "android": {
-        "buildType": "app-bundle"
-      }
+        "buildType": "app-bundle",
+        "credentialsSource": "remote"
+      },
+      "env": {
+        "GOOGLE_SERVICES_FILE": "./google-services.json"
+      },
+      "prebuildCommand": "npx expo prebuild --no-install"
     }
   },
   "submit": {

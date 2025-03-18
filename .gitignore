@@ -33,14 +33,7 @@ DerivedData
 project.xcworkspace
 
 # Android/IntelliJ
-android/.gradle
-android/build
-android/app/build
-android/local.properties
-android/.idea
-android/*.iml
-android/app/*.iml
-android/captures
+/android
 .idea
 .gradle
 local.properties
@@ -48,7 +41,6 @@ local.properties
 
 # Keep google-services.json in android/app
 /google-services.json
-!android/app/google-services.json
 
 # node.js
 node_modules/

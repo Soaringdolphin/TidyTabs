@@ -31,7 +31,7 @@
       "package": "io.github.Soaringdolphin.tidytabs",
       "versionCode": 1,
       "permissions": ["INTERNET"],
-      "googleServicesFile": "./android/app/google-services.json"
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
