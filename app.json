@@ -51,7 +51,6 @@
     ],
     "description": "A simple expense splitting app for friends and roommates",
     "githubUrl": "https://github.com/Soaringdolphin/TidyTabs",
-    "privacy": "public",
     "extra": {
       "eas": {
         "projectId": "1acdc01b-9241-408d-b677-6552f6b9a5af"
