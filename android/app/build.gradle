@@ -125,6 +125,11 @@ android {
     androidResources {
         ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
     }
+    
+    // Add compatible Compose compiler version for Kotlin 2.1.0
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"
+    }
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
@@ -148,11 +153,23 @@ android {
 }
 
 dependencies {
+    // For Kotlin 2.1.0 compatibility
+    configurations.all {
+        resolutionStrategy.eachDependency { details ->
+            if (details.requested.group == "org.jetbrains.kotlin") {
+                details.useVersion("2.1.0") // Ensure consistent Kotlin version
+            }
+        }
+    }
+    
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     
-    // Add Firebase BoM
-    implementation(platform("com.google.firebase:firebase-bom:32.7.4"))
+    // Androidx Compose compiler compatible with Kotlin 2.1.0
+    implementation("androidx.compose.compiler:compiler:1.5.8")
+    
+    // Add Firebase BoM - using a version known to work with Kotlin 2.1.0
+    implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
     
     // Add Firebase Analytics
     implementation("com.google.firebase:firebase-analytics")
