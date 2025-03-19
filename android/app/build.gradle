@@ -139,8 +139,6 @@ android {
    
    composeOptions {
     kotlinCompilerExtensionVersion = "1.5.4"  // Compatible with Kotlin 1.9.20
-    // Suppress Kotlin version compatibility check
-    kotlinCompilerVersion = "1.9.20"
     
     // This is needed to avoid the compatibility error with older Compose dependencies
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
@@ -192,15 +190,19 @@ dependencies {
                 details.useVersion(details.requested.version)
             }
         }
+        
+        // Force the Compose compiler version using resolutionStrategy
+        resolutionStrategy.force("androidx.compose.compiler:compiler:1.5.4")
     }
+    
+    // Exclude the problematic version of Compose compiler from expo-modules-core
+    configurations.implementation.exclude group: 'androidx.compose.compiler', module: 'compiler'
     
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     
-    // Explicitly add androidxComposeCompiler with forced version
-    implementation("androidx.compose.compiler:compiler:1.5.4") {
-        force = true
-    }
+    // Explicitly add androidxComposeCompiler with the correct version
+    implementation("androidx.compose.compiler:compiler:1.5.4")
     
     // Add Firebase BoM - using a version known to work with Kotlin 1.9.x
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
