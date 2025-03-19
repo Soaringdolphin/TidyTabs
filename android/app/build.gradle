@@ -139,6 +139,18 @@ android {
    
    composeOptions {
     kotlinCompilerExtensionVersion = "1.5.4"  // Compatible with Kotlin 1.9.20
+    // Suppress Kotlin version compatibility check
+    kotlinCompilerVersion = "1.9.20"
+    
+    // This is needed to avoid the compatibility error with older Compose dependencies
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            freeCompilerArgs += [
+                "-P",
+                "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+            ]
+        }
+    }
 }
 }
 
@@ -168,6 +180,11 @@ dependencies {
         resolutionStrategy.eachDependency { details ->
             if (details.requested.group == "org.jetbrains.kotlin") {
                 details.useVersion("1.9.20") // Match the version in gradle.properties
+            }
+            
+            // Force Compose compiler version
+            if (details.requested.group == "androidx.compose.compiler" && details.requested.name == "compiler") {
+                details.useVersion("1.5.4")
             }
         }
     }
