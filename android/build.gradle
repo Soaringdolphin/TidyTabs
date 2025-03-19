@@ -30,7 +30,7 @@ allprojects {
         kotlinOptions {
             freeCompilerArgs += [
                 "-P",
-                "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
+                "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=1.9.20"
             ]
         }
     }
