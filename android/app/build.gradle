@@ -186,14 +186,21 @@ dependencies {
             if (details.requested.group == "androidx.compose.compiler" && details.requested.name == "compiler") {
                 details.useVersion("1.5.4")
             }
+            
+            // Force androidx.compose libraries to be compatible
+            if (details.requested.group.startsWith("androidx.compose")) {
+                details.useVersion(details.requested.version)
+            }
         }
     }
     
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
     
-    // Androidx Compose compiler compatible with Kotlin 1.9.20
-    implementation("androidx.compose.compiler:compiler:1.5.4")
+    // Explicitly add androidxComposeCompiler with forced version
+    implementation("androidx.compose.compiler:compiler:1.5.4") {
+        force = true
+    }
     
     // Add Firebase BoM - using a version known to work with Kotlin 1.9.x
     implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
