@@ -190,13 +190,7 @@ dependencies {
                 details.useVersion(details.requested.version)
             }
         }
-        
-        // Force the Compose compiler version using resolutionStrategy
-        resolutionStrategy.force("androidx.compose.compiler:compiler:1.5.4")
     }
-    
-    // Exclude the problematic version of Compose compiler from expo-modules-core
-    configurations.implementation.exclude group: 'androidx.compose.compiler', module: 'compiler'
     
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
@@ -240,4 +234,3 @@ dependencies {
         implementation jscFlavor
     }
 }
-
