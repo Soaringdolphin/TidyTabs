@@ -9,31 +9,43 @@
       "distribution": "internal",
       "android": {
         "gradleCommand": ":app:assembleDebug",
-        "credentialsSource": "remote"
+        "credentialsSource": "remote",
+        "withoutCredentials": false,
+        "buildType": "apk"
       },
-      "prebuildCommand": "npx expo prebuild --no-install"
+      "env": {
+        "EXPO_PUBLIC_COMPOSE_VERSION": "1.5.4",
+        "EXPO_PUBLIC_KOTLIN_VERSION": "1.9.20"
+      },
+      "prebuildCommand": "npx expo prebuild --no-install --template ./androidManifest.config.js --template ./gradle.config.js"
     },
     "preview": {
       "distribution": "internal",
       "android": {
         "buildType": "apk",
-        "credentialsSource": "remote"
+        "credentialsSource": "remote",
+        "withoutCredentials": false
       },
       "env": {
-        "GOOGLE_SERVICES_FILE": "./google-services.json"
+        "GOOGLE_SERVICES_FILE": "./google-services.json",
+        "EXPO_PUBLIC_COMPOSE_VERSION": "1.5.4",
+        "EXPO_PUBLIC_KOTLIN_VERSION": "1.9.20"
       },
-      "prebuildCommand": "npx expo prebuild --no-install"
+      "prebuildCommand": "npx expo prebuild --no-install --template ./androidManifest.config.js --template ./gradle.config.js"
     },
     "production": {
       "autoIncrement": true,
       "android": {
         "buildType": "app-bundle",
-        "credentialsSource": "remote"
+        "credentialsSource": "remote",
+        "withoutCredentials": false
       },
       "env": {
-        "GOOGLE_SERVICES_FILE": "./google-services.json"
+        "GOOGLE_SERVICES_FILE": "./google-services.json",
+        "EXPO_PUBLIC_COMPOSE_VERSION": "1.5.4",
+        "EXPO_PUBLIC_KOTLIN_VERSION": "1.9.20"
       },
-      "prebuildCommand": "npx expo prebuild --no-install"
+      "prebuildCommand": "npx expo prebuild --no-install --template ./androidManifest.config.js --template ./gradle.config.js"
     }
   },
   "submit": {
