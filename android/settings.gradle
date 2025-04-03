@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild(new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), "../gradle-plugin"))
     repositories {
         google()
         mavenCentral()
@@ -7,7 +8,7 @@ pluginManagement {
 }
 
 plugins { 
-    id("com.facebook.react.settings") version "0.76.7"
+    id("com.facebook.react.settings")
 }
 
 extensions.configure(com.facebook.react.ReactSettingsExtension) { ex ->
@@ -35,6 +36,12 @@ dependencyResolutionManagement {
         reactAndroidLibs {
             from(files(new File(["node", "--print", "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), "../gradle/libs.versions.toml")))
         }
+    }
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://www.jitpack.io' }
     }
 }
 
