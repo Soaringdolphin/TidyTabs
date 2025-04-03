@@ -12,6 +12,9 @@ buildscript {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url(new File(['node', '--print', "require.resolve('react-native/package.json')"].execute(null, rootDir).text.trim(), '../android'))
+        }
     }
     dependencies {
         classpath "com.android.tools.build:gradle:8.2.2"
