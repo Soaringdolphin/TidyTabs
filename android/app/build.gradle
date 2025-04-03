@@ -1,7 +1,6 @@
 apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
-apply plugin: "com.google.gms.google-services"
 
 def projectRoot = rootDir.getAbsoluteFile().getParentFile().getAbsolutePath()
 
@@ -90,26 +89,11 @@ android {
     namespace 'io.github.Soaringdolphin.tidytabs'
     defaultConfig {
         applicationId 'io.github.Soaringdolphin.tidytabs'
-        minSdk rootProject.ext.minSdkVersion
-        targetSdk rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0.0"
     }
-    
-    // Add compile options for Java and Kotlin compatibility
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-    
-    kotlinOptions {
-        jvmTarget = "17"
-        freeCompilerArgs += [
-            "-P",
-            "plugin:androidx.compose.compiler.plugins.kotlin:suppressKotlinVersionCompatibilityCheck=true"
-        ]
-    }
-    
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -142,13 +126,20 @@ android {
     }
 }
 
-
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
 // Accepts values in comma delimited lists, example:
 // android.packagingOptions.pickFirsts=/LICENSE,**/picasa.ini
 ["pickFirsts", "excludes", "merges", "doNotStrip"].each { prop ->
-    def options = (findProperty("android.packagingOptions.$prop") ?: "").split(",").collect { it.trim() } - ""
-    if (options) {
+    // Split option: 'foo,bar' -> ['foo', 'bar']
+    def options = (findProperty("android.packagingOptions.$prop") ?: "").split(",");
+    // Trim all elements in place.
+    for (i in 0..<options.size()) options[i] = options[i].trim();
+    // `[] - ""` is essentially `[""].filter(Boolean)` removing all empty strings.
+    options -= ""
+
+    if (options.length > 0) {
+        println "android.packagingOptions.$prop += $options ($options.length)"
+        // Ex: android.packagingOptions.pickFirsts += '**/SCCS/**'
         options.each {
             android.packagingOptions[prop] += it
         }
@@ -156,35 +147,8 @@ android {
 }
 
 dependencies {
-    // For Kotlin compatibility
-    configurations.all {
-        // Exclude problematic Compose compiler version to avoid conflicts
-        exclude group: 'androidx.compose.compiler', module: 'compiler'
-        
-        resolutionStrategy.eachDependency { details ->
-            
-            // Force androidx.compose libraries to be compatible
-            if (details.requested.group.startsWith("androidx.compose")) {
-                details.useVersion(details.requested.version)
-            }
-        }
-    }
-    
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
-
-    
-    // Add Firebase BoM - using a version known to work with Kotlin 1.9.x
-    implementation(platform("com.google.firebase:firebase-bom:32.6.0"))
-    
-    // Add Firebase Analytics
-    implementation("com.google.firebase:firebase-analytics")
-    
-    // Add Firebase Auth
-    implementation("com.google.firebase:firebase-auth")
-    
-    // Add Cloud Firestore
-    implementation("com.google.firebase:firebase-firestore")
 
     def isGifEnabled = (findProperty('expo.gif.enabled') ?: "") == "true";
     def isWebpEnabled = (findProperty('expo.webp.enabled') ?: "") == "true";
@@ -210,3 +174,5 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+apply plugin: 'com.google.gms.google-services'
