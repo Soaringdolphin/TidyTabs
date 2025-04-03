@@ -124,6 +124,14 @@ android {
     androidResources {
         ignoreAssetsPattern '!.svn:!.git:!.ds_store:!*.scc:!CVS:!thumbs.db:!picasa.ini:!*~'
     }
+
+    buildFeatures {
+        compose true
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.8"  // This version is compatible with Kotlin 1.9.22
+    }
 }
 
 // Apply static values from `gradle.properties` to the `android.packagingOptions`
